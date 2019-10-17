@@ -5,8 +5,10 @@ import FlexBox from "./components/flexBox";
 
 export default function App() {
   const [ outputText, setOutputText] = useState("Esther is coming!!");
+  
   return (
     <View style={styles.container}>
+      
       <Input/>
       {/* <FlexBox/> */}
     </View>

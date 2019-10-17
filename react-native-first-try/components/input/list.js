@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {  Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const List = props =>{
+    console.log(props);
     return(
     <TouchableOpacity onPress = {props.onDelete.bind(this, props.id)}>
         <View style = { styles.outputList}>

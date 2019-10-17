@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, FlatList} from 'react-native';
+import { StyleSheet, View, FlatList, Button} from 'react-native';
 import List from './list';
 import Form from "./form"
 
@@ -7,6 +7,7 @@ import Form from "./form"
 function Input() {
   const [ outputText, setOutputText] = useState([]);
   const [ enteredGoal, setEnteredGoal] = useState("");
+  const [isAddMode, setIsAddMode] = useState(false);
   const getName = (enteredText)=>{      
       setEnteredGoal(enteredText);
   }
@@ -14,6 +15,8 @@ function Input() {
       console.log(enteredGoal);
       setOutputText(outputText => [...outputText,{id : Math.random().toString(),val : enteredGoal}]);
       console.log(outputText);
+      setEnteredGoal("");
+      setIsAddMode(false);
   }
   const removeGoal = goalId => {
     setOutputText(outputText => {
@@ -21,12 +24,19 @@ function Input() {
       });
       console.log("Deleting : ",  goalId);
   }
+  const cancelGoal = () => {
+    setIsAddMode(false);
+  }
   return (
     <View style={styles.container}>
+      <Button title = "Add New Goal" onPress={()=> setIsAddMode(true)}></Button>
         <Form 
+        visible = {isAddMode}
         getName = {getName} 
         enteredGoal = {enteredGoal} 
-        checkInput = {checkInput}/>
+        checkInput = {checkInput}
+        onCancel = {cancelGoal}
+        />
 
       <FlatList 
             keyExtractor = {(item, index) => item.id}
